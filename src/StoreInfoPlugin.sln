@@ -3,25 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{5146D14B-AE1E-4AD8-891D-AAB23A208F9B}"
-	ProjectSection(SolutionItems) = preProject
-		docs\README.md = docs\README.md
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreInfo.Plugin", "StoreInfo.Plugin\StoreInfo.Plugin.csproj", "{EA7223DF-592D-4862-950D-298FB9E7983A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1683BDC8-158D-42AD-A0D7-5451FF882E90}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreInfo.Plugin.Droid", "StoreInfo.Plugin.Droid\StoreInfo.Plugin.Droid.csproj", "{F8EDC621-E0D7-411A-9FE6-8A70D831351E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5CE5F308-F697-4281-BE01-F2F9977468D7}"
-	ProjectSection(SolutionItems) = preProject
-		CHANGELOG.md = CHANGELOG.md
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreInfo.Plugin.iOS", "StoreInfo.Plugin.iOS\StoreInfo.Plugin.iOS.csproj", "{E71F3053-056C-4381-9638-048ED73BDFF6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreInfo.Plugin", "src\StoreInfo.Plugin\StoreInfo.Plugin.csproj", "{EA7223DF-592D-4862-950D-298FB9E7983A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreInfo.Plugin.Droid", "src\StoreInfo.Plugin.Droid\StoreInfo.Plugin.Droid.csproj", "{F8EDC621-E0D7-411A-9FE6-8A70D831351E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreInfo.Plugin.iOS", "src\StoreInfo.Plugin.iOS\StoreInfo.Plugin.iOS.csproj", "{E71F3053-056C-4381-9638-048ED73BDFF6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreInfo.Plugin.Abstraction", "src\StoreInfo.Plugin.Abstraction\StoreInfo.Plugin.Abstraction.csproj", "{9907C330-C7CC-42C2-8F62-C915CC5FE0E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreInfo.Plugin.Abstraction", "StoreInfo.Plugin.Abstraction\StoreInfo.Plugin.Abstraction.csproj", "{9907C330-C7CC-42C2-8F62-C915CC5FE0E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -246,12 +234,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{EA7223DF-592D-4862-950D-298FB9E7983A} = {1683BDC8-158D-42AD-A0D7-5451FF882E90}
-		{F8EDC621-E0D7-411A-9FE6-8A70D831351E} = {1683BDC8-158D-42AD-A0D7-5451FF882E90}
-		{E71F3053-056C-4381-9638-048ED73BDFF6} = {1683BDC8-158D-42AD-A0D7-5451FF882E90}
-		{9907C330-C7CC-42C2-8F62-C915CC5FE0E5} = {1683BDC8-158D-42AD-A0D7-5451FF882E90}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A4A3BB4-1170-495F-8125-AA00E47EA8D1}
