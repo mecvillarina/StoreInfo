@@ -8,10 +8,9 @@ namespace StoreInfo.Plugin.Abstraction
 	public abstract class BaseStoreInfo : IStoreInfo, IDisposable
 	{
 		public abstract string GetCurrentAppVersion();
-		public abstract Task<AppStoreInfo> GetStoreAppVersion(string platform);
-		public abstract bool IsLatest(string appVersion);
+        public abstract Task<AppStoreInfo> GetStoreAppVersion();
 
-		public void Dispose()
+        public void Dispose()
 		{
 			Dispose(true);
 			GC.SuppressFinalize(this);

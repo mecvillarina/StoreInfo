@@ -7,8 +7,7 @@ namespace StoreInfo.Plugin.Abstraction
 {
 	public interface IStoreInfo : IDisposable
 	{
-		bool IsLatest(string appVersion);
 		string GetCurrentAppVersion();
-		Task<AppStoreInfo> GetStoreAppVersion(string platform);
-	}
+        Task<AppStoreInfo> GetStoreAppVersion();
+    }
 }

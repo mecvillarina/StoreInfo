@@ -1,6 +1,7 @@
 ﻿
 using Android.App;
 using Android.Content.PM;
+using StoreInfo.Plugin.Abstraction;
 
 namespace StoreInfo.Plugin.Droid
 {
