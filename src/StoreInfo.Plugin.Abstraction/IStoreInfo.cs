@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace StoreInfo.Plugin.Abstraction
 {
-	public interface IStoreInfo
+	public interface IStoreInfo : IDisposable
 	{
 		bool IsLatest(string appVersion);
 		string GetCurrentAppVersion();

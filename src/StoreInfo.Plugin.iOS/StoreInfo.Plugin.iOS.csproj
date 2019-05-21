@@ -41,7 +41,18 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppInfoProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StoreInfo.Plugin.Abstraction\StoreInfo.Plugin.Abstraction.csproj">
+      <Project>{9907c330-c7cc-42c2-8f62-c915cc5fe0e5}</Project>
+      <Name>StoreInfo.Plugin.Abstraction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StoreInfo.Plugin\StoreInfo.Plugin.csproj">
+      <Project>{ea7223df-592d-4862-950d-298fb9e7983a}</Project>
+      <Name>StoreInfo.Plugin</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

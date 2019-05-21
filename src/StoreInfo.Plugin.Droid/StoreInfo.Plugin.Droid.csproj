@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppInfoProvider.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -52,13 +53,20 @@
     <None Include="Resources\AboutResources.txt" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="27.0.2.1" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\values\strings.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StoreInfo.Plugin.Abstraction\StoreInfo.Plugin.Abstraction.csproj">
+      <Project>{9907c330-c7cc-42c2-8f62-c915cc5fe0e5}</Project>
+      <Name>StoreInfo.Plugin.Abstraction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StoreInfo.Plugin\StoreInfo.Plugin.csproj">
+      <Project>{ea7223df-592d-4862-950d-298fb9e7983a}</Project>
+      <Name>StoreInfo.Plugin</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
