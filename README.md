@@ -15,7 +15,7 @@ containerRegistry.RegisterInstance<IStoreInfo>(CrossStoreInfo.Current);
 
 ##Usage
 
-###Get installed version number
+### Get installed version number
 
 Gets the version number of the current app's installed version.
 
@@ -23,7 +23,7 @@ Gets the version number of the current app's installed version.
 string versionNumber = await CrossStoreInfo.Current.InstalledVersionNumber;
 ```
 
-###Get latest app information
+### Get latest app information
 
 Gets the information of the current app's latest version available in the public store.
 
