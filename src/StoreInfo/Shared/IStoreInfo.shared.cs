@@ -7,7 +7,8 @@ namespace Plugin.StoreInfo
 {
     public interface IStoreInfo
     {
-        string GetCurrentAppVersion();
-        Task<AppStoreInfo> GetStoreAppVersion();
+        string GetAppPackageName();
+		string GetCurrentVersion();
+        Task<AppStoreInfo> GetStoreAppVersionAsync();
     }
 }

@@ -5,7 +5,7 @@ namespace Plugin.StoreInfo
     /// <summary>
     /// Cross StoreInfo
     /// </summary>
-    public static class CrossStoreInfo
+    public class CrossStoreInfo
     {
         static Lazy<IStoreInfo> implementation = new Lazy<IStoreInfo>(() => CreateStoreInfo(), System.Threading.LazyThreadSafetyMode.PublicationOnly);
 

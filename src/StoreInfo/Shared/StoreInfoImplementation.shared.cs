@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -8,142 +9,148 @@ using Xamarin.Forms;
 
 namespace Plugin.StoreInfo
 {
-    public class StoreInfoImplementation : IStoreInfo
-    {
-        private readonly IAppInfoProvider _appInfoProvider;
-        public StoreInfoImplementation()
-        {
-            _appInfoProvider = DependencyService.Get<IAppInfoProvider>();
-        }
+	public class StoreInfoImplementation : IStoreInfo
+	{
+		private readonly IAppInfoProvider _appInfoProvider;
+		public StoreInfoImplementation()
+		{
+			_appInfoProvider = DependencyService.Get<IAppInfoProvider>();
+		}
 
-        public string GetCurrentAppVersion()
-        {
-            return _appInfoProvider?.PackageName;
-        }
+		public string GetAppPackageName()
+		{
+			return _appInfoProvider?.PackageName;
+		}
 
-        public async Task<AppStoreInfo> GetStoreAppVersion()
-        {
-            var version = await GetStoreAppVersion(_appInfoProvider?.PackageName);
-            var appVersion = version.Item1;
-            var storeUrl = version.Item2;
+		public string GetCurrentVersion()
+		{
+			return _appInfoProvider?.GetVersion();
+		}
 
-            if (!string.IsNullOrEmpty(appVersion))
-            {
-                return new AppStoreInfo() { AppVersion = appVersion, StoreUrl = storeUrl };
-            }
+		public async Task<AppStoreInfo> GetStoreAppVersionAsync()
+		{
+			var version = await GetStoreAppVersion(_appInfoProvider?.PackageName);
+			var appVersion = version.Item1;
+			var storeUrl = version.Item2;
 
-            return null;
-        }
+			if (!string.IsNullOrEmpty(appVersion))
+			{
+				return new AppStoreInfo() { AppVersion = appVersion, StoreUrl = storeUrl };
+			}
 
-        private async Task<Tuple<string, string>> GetStoreAppVersion(string packageName)
-        {
-            packageName = packageName ?? string.Empty;
-            packageName = packageName.Trim();
-            if (string.IsNullOrEmpty(packageName))
-            {
-                return new Tuple<string, string>(string.Empty, string.Empty);
-            }
+			return null;
+		}
 
-            if (Device.RuntimePlatform == Device.Android)
-            {
-                return await GetPlayStoreAppVersion(packageName);
-            }
-            else if (Device.RuntimePlatform == Device.iOS)
-            {
-                return await GetAppStoreAppVersion(packageName);
-            }
+		private async Task<Tuple<string, string>> GetStoreAppVersion(string packageName)
+		{
+			packageName = packageName ?? string.Empty;
+			packageName = packageName.Trim();
+			if (string.IsNullOrEmpty(packageName))
+			{
+				return new Tuple<string, string>(string.Empty, string.Empty);
+			}
 
-            return new Tuple<string, string>(string.Empty, string.Empty);
-        }
+			if (Device.RuntimePlatform == Device.Android)
+			{
+				return await GetPlayStoreAppVersion(packageName);
+			}
+			else if (Device.RuntimePlatform == Device.iOS)
+			{
+				return await GetAppStoreAppVersion(packageName);
+			}
 
-        private async Task<Tuple<string, string>> GetPlayStoreAppVersion(string packageName)
-        {
-#if DEBUG
-            packageName = "com.mecodes.chronos.droid";
-#endif
-            string appVersion = string.Empty;
-            string appUrlString = string.Format("https://play.google.com/store/apps/details?id={0}", packageName);
+			return new Tuple<string, string>(string.Empty, string.Empty);
+		}
 
-            try
-            {
-                using (var client = new HttpClient())
-                {
-                    client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6");
+		private async Task<Tuple<string, string>> GetPlayStoreAppVersion(string packageName)
+		{
+			//#if DEBUG
+			//            packageName = "com.mecodes.chronos.droid";
+			//#endif
+			string appVersion = string.Empty;
+			string appUrlString = string.Format("https://play.google.com/store/apps/details?id={0}", packageName);
+
+			try
+			{
+				using (var client = new HttpClient())
+				{
+					client.DefaultRequestHeaders.Clear();
+					client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6");
 
 
-                    var response = await client.GetAsync(appUrlString);
+					var response = await client.GetAsync(appUrlString);
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string contentResponse = await response.Content.ReadAsStringAsync();
+					if (response.IsSuccessStatusCode)
+					{
+						string contentResponse = await response.Content.ReadAsStringAsync();
 
-                        var htmlDoc = new HtmlDocument();
-                        htmlDoc.LoadHtml(contentResponse);
-                        var rootNode = htmlDoc.DocumentNode;
+						var htmlDoc = new HtmlDocument();
+						htmlDoc.LoadHtml(contentResponse);
+						var rootNode = htmlDoc.DocumentNode;
 
-                        if (rootNode != null)
-                        {
-                            var currentVersionNode = rootNode.Descendants().FirstOrDefault(x => x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains("hAyfc") && x.InnerText.Contains("Current Version"));
+						if (rootNode != null)
+						{
+							var currentVersionNode = rootNode.Descendants().FirstOrDefault(x => x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains("hAyfc") && x.InnerText.Contains("Current Version"));
 
-                            if (currentVersionNode != null && !string.IsNullOrEmpty(currentVersionNode.InnerText))
-                            {
-                                appVersion = currentVersionNode.InnerText.Replace("Current Version", "").Trim();
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-            }
+							if (currentVersionNode != null && !string.IsNullOrEmpty(currentVersionNode.InnerText))
+							{
+								appVersion = currentVersionNode.InnerText.Replace("Current Version", "").Trim();
+							}
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine($"Store Info Implementation:{ex.Message}");
+			}
 
-            return new Tuple<string, string>(appVersion, appUrlString);
-        }
+			return new Tuple<string, string>(appVersion, appUrlString);
+		}
 
-        private async Task<Tuple<string, string>> GetAppStoreAppVersion(string packageName)
-        {
+		private async Task<Tuple<string, string>> GetAppStoreAppVersion(string packageName)
+		{
 
-#if DEBUG
-            packageName = "com.mecodes.chronos.droid";
-#endif
-            try
-            {
-                using (var client = new HttpClient())
-                {
-                    client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6");
+			//#if DEBUG
+			//            packageName = "com.mecodes.chronos.droid";
+			//#endif
+			try
+			{
+				using (var client = new HttpClient())
+				{
+					client.DefaultRequestHeaders.Clear();
+					client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6");
 
-                    string appUrlString = string.Format("https://itunes.apple.com/us/lookup?bundleId={0}", packageName);
+					string appUrlString = string.Format("https://itunes.apple.com/us/lookup?bundleId={0}", packageName);
 
-                    var response = await client.GetAsync(appUrlString);
+					var response = await client.GetAsync(appUrlString);
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string contentResponse = await response.Content.ReadAsStringAsync();
+					if (response.IsSuccessStatusCode)
+					{
+						string contentResponse = await response.Content.ReadAsStringAsync();
 
-                        var lookupContractResponse = JsonConvert.DeserializeObject<AppStoreLookupRoot>(contentResponse);
+						var lookupContractResponse = JsonConvert.DeserializeObject<AppStoreLookupRoot>(contentResponse);
 
-                        if (lookupContractResponse.ResultCount > 0)
-                        {
-                            var lookupResult = lookupContractResponse.LookupResults.FirstOrDefault();
+						if (lookupContractResponse.ResultCount > 0)
+						{
+							var lookupResult = lookupContractResponse.LookupResults.FirstOrDefault();
 
-                            if (lookupResult != null)
-                            {
-                                var appVersion = lookupResult.Version;
-                                var storeUrl = lookupResult.TrackViewUrl.OriginalString;
-                                return new Tuple<string, string>(appVersion, storeUrl);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
+							if (lookupResult != null)
+							{
+								var appVersion = lookupResult.Version;
+								var storeUrl = lookupResult.TrackViewUrl.OriginalString;
+								return new Tuple<string, string>(appVersion, storeUrl);
+							}
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine($"Store Info Implementation:{ex.Message}");
+			}
 
-            }
-
-            return new Tuple<string, string>(string.Empty, string.Empty);
-        }
-    }
+			return new Tuple<string, string>(string.Empty, string.Empty);
+		}
+	}
 }
