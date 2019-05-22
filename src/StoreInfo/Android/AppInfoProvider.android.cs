@@ -4,7 +4,7 @@ using Android.Content.PM;
 namespace Plugin.StoreInfo
 {
     [Android.Runtime.Preserve(AllMembers = true)]
-    public class AppInfoProvider : IAppInfoProvider
+    internal class AppInfoProvider : IAppInfoProvider
     {
         public string PackageName
         {
@@ -15,8 +15,8 @@ namespace Plugin.StoreInfo
         {
             var context = global::Android.App.Application.Context;
 
-            PackageManager manager = context.PackageManager;
-            PackageInfo info = manager.GetPackageInfo(context.PackageName, 0);
+            var manager = context.PackageManager;
+            var info = manager.GetPackageInfo(context.PackageName, 0);
 
             return info.VersionName;
         }
@@ -24,8 +24,8 @@ namespace Plugin.StoreInfo
         public int GetBuild()
         {
             var context = global::Android.App.Application.Context;
-            PackageManager manager = context.PackageManager;
-            PackageInfo info = manager.GetPackageInfo(context.PackageName, 0);
+            var manager = context.PackageManager;
+            var info = manager.GetPackageInfo(context.PackageName, 0);
 
             return info.VersionCode;
         }

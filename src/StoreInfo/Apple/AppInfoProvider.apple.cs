@@ -3,7 +3,7 @@
 namespace Plugin.StoreInfo
 {
     [Foundation.Preserve(AllMembers = true)]
-    public  class AppInfoProvider : IAppInfoProvider
+    internal class AppInfoProvider : IAppInfoProvider
     {
         public string PackageName
         {

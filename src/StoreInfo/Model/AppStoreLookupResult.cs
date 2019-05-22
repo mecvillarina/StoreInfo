@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Plugin.StoreInfo
 {
-    public class AppStoreLookupRoot
+    internal class AppStoreLookupRoot
     {
         [JsonProperty("resultCount")]
         public long ResultCount { get; set; }
@@ -14,7 +14,7 @@ namespace Plugin.StoreInfo
         public List<AppStoreLookupResult> LookupResults { get; set; }
     }
 
-    public class AppStoreLookupResult
+    internal class AppStoreLookupResult
     {
         [JsonProperty("currentVersionReleaseDate")]
         public DateTimeOffset CurrentVersionReleaseDate { get; set; }
