@@ -29,21 +29,20 @@
     <LangVersion>latest</LangVersion>
     
     <!--TODO: Fill these in-->
-    <PackageLicenseUrl>LINK TO LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>LINK TO PROJECT</PackageProjectUrl>
-    <RepositoryUrl>LINK TO PROJECT</RepositoryUrl>
-    <PackageReleaseNotes>RELEASE NOTES</PackageReleaseNotes>
-    <PackageIconUrl>ICON URL</PackageIconUrl>
+    <PackageLicenseUrl>https://github.com/mecvillarina/StoreInfo/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/mecvillarina/StoreInfo</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mecvillarina/StoreInfo</RepositoryUrl>
+    <PackageReleaseNotes>https://github.com/mecvillarina/StoreInfo/blob/master/CHANGELOG.md</PackageReleaseNotes>
+    <PackageIconUrl>../../assets/icon.png</PackageIconUrl>
     <PackageTags>xamarin, windows, ios, android, xamarin.forms, plugin, StoreInfo</PackageTags>
     
     <Title>StoreInfo Plugin for Xamarin and Windows</Title>
-    <Summary>Summary of nuget</Summary>
-    <Description>Plugin Description</Description>
+    <Summary>Store Info for Xamarin Forms has a mechanism to extract the current information of your app in store (playstore/appstore) using the package name/bundle id. </Summary>
+    <Description>Store Info for Xamarin Forms has a mechanism to extract the current information of your app in store (playstore/appstore) using the package name/bundle id. Install this in your PCL and platform specific projects.</Description>
     
-    
-    <Owners>YOU</Owners>
-    <Authors>YOU</Authors>
-    <Copyright>Copyright 2018</Copyright>
+    <Owners>mecvillarina</Owners>
+    <Authors>mecvillarina</Authors>
+    <Copyright>Copyright 2019</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">

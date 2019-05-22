@@ -1,6 +1,6 @@
 ##  Store Info for Xamarin.Forms [![PayPal donate button](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4KHTXCBWYXTNG "Donate to this project using Paypal")
 
-Store Info for Xamarin Forms has a mechanism to provide to your app the current Play Store and App Store version and store link based on your app package name/bundle id. 
+Store Info for Xamarin Forms has a mechanism to extract the current information of your app in store (playstore/appstore) using the package name/bundle id.  Install this in your PCL and platform specific projects.
 
 Sample: https://github.com/mecvillarina/StoreInfo/tree/master/sample
 
