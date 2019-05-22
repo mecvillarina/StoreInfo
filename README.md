@@ -59,13 +59,13 @@ string latestVersionNumber = await CrossStoreInfo.Current.GetLatestVersionNumber
 Open the current running app in the public store:
 
 ```csharp
-await CrossLatestVersion.Current.OpenAppInStore();
+await CrossStoreInfo.Current.OpenAppInStore();
 ```
 
 Open any app in the public store:
 
 ```csharp
-await CrossLatestVersion.Current.OpenAppInStore("appName");
+await CrossStoreInfo.Current.OpenAppInStore("appName");
 ```
 
 - `appName` should be the app's **bundle identifier** (`CFBundleIdentifier`) on iOS and the app's **package name** on Android.
