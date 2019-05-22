@@ -13,8 +13,6 @@ You have the option to use your DI/IOC container
 containerRegistry.RegisterInstance<IStoreInfo>(CrossStoreInfo.Current);
 ```
 
-##Usage
-
 ### Get installed version number
 
 Gets the version number of the current app's installed version.
