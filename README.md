@@ -2,6 +2,8 @@
 
 Store Info for Xamarin Forms has a mechanism to provide to your app the current Play Store and App Store version and store link based on your app package name/bundle id. 
 
+Sample: https://github.com/mecvillarina/StoreInfo/tree/master/sample
+
 ## Simple Example:
 
 ### Init
@@ -30,23 +32,24 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 }
 ```
 
-<!-- You have the option to use your DI/IOC container
+You have the option to use your DI/IOC container
 
 ```C#
-    container.Register<IStoreInfo, 
-    global::Xamarin.Forms.Forms.Init();
-    Plugin.StoreInfo.StoreInfo.Init();
-    ...
-``` -->
+    containerRegistry.RegisterInstance<IStoreInfo>(CrossStoreInfo.Current);
+...
 
-<!-- ###Usage
+
+###Usage
 
 On your XF PCL/Core Project. You can get your package name and current local version
 
 ```C#
 
-    string packageName = CrossStoreInfo.Current.GetAppPackageName();
-    string 
-    Plugin.StoreInfo.StoreInfo.Init();
+    string packageName = CrossStoreInfo.Current.GetAppPackageName(); //Return package name / bundle id
+	string version = CrossStoreInfo.Current.GetCurrentVersion();    //Return manifest version
+	var appStoreInfo = await CrossStoreInfo.Current.GetStoreAppVersionAsync();  //Return store app version and link
 
-``` -->
+```
+
+## License
+The Apache License 2.0 see [License file](LICENSE)

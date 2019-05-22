@@ -1,11 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage x:Class="StoreInfo.Sample.Views.MainPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StoreInfo.Sample.Views.MainPage"
              Title="{Binding Title}">
 
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <Label Text="Welcome to Xamarin Forms and Prism!" />
+    <StackLayout HorizontalOptions="CenterAndExpand"
+                 VerticalOptions="CenterAndExpand">
+        <Label FontAttributes="Bold"
+               Text="Package Name" />
+        <Label Text="{Binding PackageName}" />
+
+        <Label FontAttributes="Bold"
+               Text="Manifest Version" />
+        <Label Text="{Binding ManifestVersion}" />
+
+        <Label FontAttributes="Bold"
+               Text="Store Version" />
+        <Label Text="{Binding AppStoreVersion}" />
     </StackLayout>
 
 </ContentPage>

@@ -27,7 +27,6 @@ namespace StoreInfo.Sample.Droid
     {
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-			containerRegistry.Register<IStoreInfo, CrossStoreInfo>();
             // Register any platform specific implementations
         }
     }
