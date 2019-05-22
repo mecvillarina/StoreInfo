@@ -2,6 +2,8 @@
 
 Store Info for Xamarin Forms has a mechanism to extract the current information of your app in store (playstore/appstore) using the package name/bundle id.  Install this in your PCL and platform specific projects.
 
+Nuget: https://www.nuget.org/packages/Plugin.StoreInfo/
+
 Sample: https://github.com/mecvillarina/StoreInfo/tree/master/sample
 
 ## Simple Example:
