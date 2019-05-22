@@ -27,13 +27,13 @@ string versionNumber = await CrossStoreInfo.Current.InstalledVersionNumber;
 Gets the information of the current app's latest version available in the public store.
 
 ```C#
-string versionNumber = await CrossStoreInfo.Current.GetAppInfo();
+var appStoreInfo = await CrossStoreInfo.Current.GetAppInfo();
 ```
 
 Gets the information of an app's latest version available in the public store.
 
 ```C#
-string versionNumber = await CrossStoreInfo.Current.GetAppInfo(appName);
+var appStoreInfo = await CrossStoreInfo.Current.GetAppInfo(appName);
 ```
 
 - `appName` should be the app's **bundle identifier** (`CFBundleIdentifier`) on iOS and the app's **package name** on Android.
