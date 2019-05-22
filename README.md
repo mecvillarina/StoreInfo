@@ -5,55 +5,71 @@ Store Info for Xamarin Forms has a mechanism to extract the current information 
 Nuget: https://www.nuget.org/packages/Plugin.StoreInfo/
 Sample: https://github.com/mecvillarina/StoreInfo/tree/master/sample
 
-## Simple Example:
-
-### Init
-
-On your XF Android project. Add the following to your MainActivity.cs
-
-```C#
-protected override void OnCreate(Bundle savedInstanceState)
-{
-    ...
-    global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-    Plugin.StoreInfo.StoreInfo.Init();
-    ...
-}
-```
-
-On your XF iOS project. Add the following to your AppDelegate.cs
-
-```C#
-public override bool FinishedLaunching(UIApplication app, NSDictionary options)
-{
-    ...
-    global::Xamarin.Forms.Forms.Init();
-    Plugin.StoreInfo.StoreInfo.Init();
-    ...
-}
-```
+## Usage:
 
 You have the option to use your DI/IOC container
 
 ```C#
-...
-
 containerRegistry.RegisterInstance<IStoreInfo>(CrossStoreInfo.Current);
-
-...
 ```
 
-###Usage
+##Usage
 
-On your XF PCL/Core Project. You can get your package name and current local version
+###Get installed version number
+
+Gets the version number of the current app's installed version.
 
 ```C#
-
-string packageName = CrossStoreInfo.Current.GetAppPackageName(); //Return package name / bundle id
-string version = CrossStoreInfo.Current.GetCurrentVersion();    //Return manifest version
-var appStoreInfo = await CrossStoreInfo.Current.GetStoreAppVersionAsync();  //Return store app version and link
-
+string versionNumber = await CrossStoreInfo.Current.InstalledVersionNumber;
 ```
+
+###Get latest app information
+
+Gets the information of the current app's latest version available in the public store.
+
+```C#
+string versionNumber = await CrossStoreInfo.Current.GetAppInfo();
+```
+
+Gets the information of an app's latest version available in the public store.
+
+```C#
+string versionNumber = await CrossStoreInfo.Current.GetAppInfo(appName);
+```
+
+- `appName` should be the app's **bundle identifier** (`CFBundleIdentifier`) on iOS and the app's **package name** on Android.
+
+### Get latest version number
+
+Get the version number of the current running app's latest version available in the public store:
+
+```csharp
+string latestVersionNumber = await CrossStoreInfo.Current.GetLatestVersionNumber();
+```
+
+Get the version number of any app's latest version available in the public store:
+
+```csharp
+string latestVersionNumber = await CrossStoreInfo.Current.GetLatestVersionNumber("appName");
+```
+
+- `appName` should be the app's **bundle identifier** (`CFBundleIdentifier`) on iOS and the app's **package name** on Android.
+
+### Open app in public store
+
+Open the current running app in the public store:
+
+```csharp
+await CrossLatestVersion.Current.OpenAppInStore();
+```
+
+Open any app in the public store:
+
+```csharp
+await CrossLatestVersion.Current.OpenAppInStore("appName");
+```
+
+- `appName` should be the app's **bundle identifier** (`CFBundleIdentifier`) on iOS and the app's **package name** on Android.
 
 ## License
 The Apache License 2.0 see [License file](LICENSE)

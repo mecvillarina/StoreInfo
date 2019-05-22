@@ -16,8 +16,8 @@
     <Product>Plugin.StoreInfo</Product>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
-    <Version>1.0.1</Version>
-    <PackageVersion>1.0.1</PackageVersion>
+    <Version>1.0.2</Version>
+    <PackageVersion>1.0.2</PackageVersion>
     <PackOnBuild>true</PackOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <LangVersion>default</LangVersion>
@@ -104,6 +104,14 @@
     <PackageReference Include="HtmlAgilityPack">
       <Version>1.11.4</Version>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Shared\StoreInfoException.shared.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Apple\StoreInfoImplementation.apple.cs" />
   </ItemGroup>
 
   <!--Additional item groups-->
