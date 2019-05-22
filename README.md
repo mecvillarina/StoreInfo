@@ -35,9 +35,11 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 You have the option to use your DI/IOC container
 
 ```C#
-    ...
-    containerRegistry.RegisterInstance<IStoreInfo>(CrossStoreInfo.Current);
-    ...
+...
+
+containerRegistry.RegisterInstance<IStoreInfo>(CrossStoreInfo.Current);
+
+...
 ```
 
 ###Usage
@@ -46,9 +48,9 @@ On your XF PCL/Core Project. You can get your package name and current local ver
 
 ```C#
 
-    string packageName = CrossStoreInfo.Current.GetAppPackageName(); //Return package name / bundle id
-	string version = CrossStoreInfo.Current.GetCurrentVersion();    //Return manifest version
-	var appStoreInfo = await CrossStoreInfo.Current.GetStoreAppVersionAsync();  //Return store app version and link
+string packageName = CrossStoreInfo.Current.GetAppPackageName(); //Return package name / bundle id
+string version = CrossStoreInfo.Current.GetCurrentVersion();    //Return manifest version
+var appStoreInfo = await CrossStoreInfo.Current.GetStoreAppVersionAsync();  //Return store app version and link
 
 ```
 
