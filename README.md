@@ -30,13 +30,23 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 }
 ```
 
-###Usage
+<!-- You have the option to use your DI/IOC container
+
+```C#
+    container.Register<IStoreInfo, 
+    global::Xamarin.Forms.Forms.Init();
+    Plugin.StoreInfo.StoreInfo.Init();
+    ...
+``` -->
+
+<!-- ###Usage
 
 On your XF PCL/Core Project. You can get your package name and current local version
 
 ```C#
 
-    global::Xamarin.Forms.Forms.Init();
+    string packageName = CrossStoreInfo.Current.GetAppPackageName();
+    string 
     Plugin.StoreInfo.StoreInfo.Init();
 
-```
+``` -->
