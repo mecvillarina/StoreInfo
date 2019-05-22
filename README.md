@@ -35,9 +35,10 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 You have the option to use your DI/IOC container
 
 ```C#
+    ...
     containerRegistry.RegisterInstance<IStoreInfo>(CrossStoreInfo.Current);
-...
-
+    ...
+```
 
 ###Usage
 
