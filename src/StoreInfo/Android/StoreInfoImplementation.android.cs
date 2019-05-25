@@ -25,6 +25,23 @@ namespace Plugin.StoreInfo
         }
 
         /// <inheritdoc />
+        public async Task<bool> IsUsingLatestVersion()
+        {
+            var latestVersion = string.Empty;
+
+            try
+            {
+                latestVersion = await GetLatestVersionNumber();
+
+                return Version.Parse(latestVersion).CompareTo(Version.Parse(_versionName)) <= 0;
+            }
+            catch (Exception e)
+            {
+                throw new StoreInfoException($"Error comparing current app version number with latest. Version name={_versionName} and lastest version={latestVersion} .", e);
+            }
+        }
+
+        /// <inheritdoc />
         public async Task<AppStoreInfo> GetAppInfo()
         {
             return await GetAppInfo(_packageName);
@@ -95,6 +112,7 @@ namespace Plugin.StoreInfo
             return appStoreInfo.StoreVersion;
         }
 
+       
         /// <inheritdoc />
         public Task OpenAppInStore()
         {

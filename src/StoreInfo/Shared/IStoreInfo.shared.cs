@@ -17,6 +17,12 @@ namespace Plugin.StoreInfo
         string InstalledVersionNumber { get; }
 
         /// <summary>
+        /// Check if the current app is using the latest version.
+        /// </summary>
+        /// <value>Return True if the app is using the latest version.</value>
+        Task<bool> IsUsingLatestVersion();
+
+        /// <summary>
         /// Gets the information of the current app's latest version available in the public store.
         /// </summary>
         /// <returns>The current app's latest information.</returns>

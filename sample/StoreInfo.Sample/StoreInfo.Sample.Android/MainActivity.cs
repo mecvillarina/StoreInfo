@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using Acr.UserDialogs;
+using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Plugin.StoreInfo;
@@ -19,7 +20,8 @@ namespace StoreInfo.Sample.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 			Plugin.StoreInfo.StoreInfo.Init();
-			LoadApplication(new App(new AndroidInitializer()));
+            UserDialogs.Init(this);
+            LoadApplication(new App(new AndroidInitializer()));
         }
     }
 

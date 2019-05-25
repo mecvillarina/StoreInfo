@@ -17,6 +17,9 @@
         <Label FontAttributes="Bold"
                Text="Store Version" />
         <Label Text="{Binding AppStoreVersion}" />
+
+        <Button Command="{Binding CheckUpdateCommand}"
+                Text="Check Update." />
     </StackLayout>
 
 </ContentPage>
