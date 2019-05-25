@@ -19,7 +19,6 @@ namespace StoreInfo.Sample.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
-			Plugin.StoreInfo.StoreInfo.Init();
             UserDialogs.Init(this);
             LoadApplication(new App(new AndroidInitializer()));
         }

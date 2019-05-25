@@ -58,20 +58,20 @@ namespace Plugin.StoreInfo
             string appVersion = string.Empty;
             string appUrl = string.Format("https://play.google.com/store/apps/details?id={0}", appName);
 
-            using (var client = new HttpClient())
+            try
             {
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6");
-
-                var response = await client.GetAsync(appUrl, HttpCompletionOption.ResponseContentRead);
-
-                if (!response.IsSuccessStatusCode)
+                using (var client = new HttpClient())
                 {
-                    throw new StoreInfoException($"Error connecting to the Play Store. Url={appUrl}.");
-                }
+                    client.DefaultRequestHeaders.Clear();
+                    client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6");
 
-                try
-                {
+                    var response = await client.GetAsync(appUrl, HttpCompletionOption.ResponseContentRead);
+
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        throw new StoreInfoException($"Error connecting to the Play Store. Url={appUrl}.");
+                    }
+
                     string contentResponse = await response.Content.ReadAsStringAsync();
 
                     var htmlDoc = new HtmlDocument();
@@ -89,12 +89,11 @@ namespace Plugin.StoreInfo
                         }
                     }
                 }
-                catch (Exception e)
-                {
-                    throw new StoreInfoException($"Error parsing content from the Play Store. Url={appUrl}.", e);
-                }
             }
-
+            catch (Exception e)
+            {
+                throw new StoreInfoException($"Error parsing content from the Play Store. Url={appUrl}.", e);
+            }
 
             return new AppStoreInfo() { StoreVersion = appVersion, StoreUrl = appUrl, AppName = appName };
         }
@@ -112,7 +111,12 @@ namespace Plugin.StoreInfo
             return appStoreInfo.StoreVersion;
         }
 
-       
+        /// <inheritdoc />
+        public string GetPackageName()
+        {
+            return _packageName;
+        }
+
         /// <inheritdoc />
         public Task OpenAppInStore()
         {
@@ -142,5 +146,7 @@ namespace Plugin.StoreInfo
 
             return Task.FromResult(true);
         }
+
+      
     }
 }

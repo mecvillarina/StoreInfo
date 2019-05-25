@@ -2,6 +2,8 @@
 using Plugin.StoreInfo;
 using Prism.Commands;
 using Prism.Navigation;
+using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace StoreInfo.Sample.ViewModels
@@ -40,27 +42,58 @@ namespace StoreInfo.Sample.ViewModels
 
         private async Task ExecuteCheckUpdateCommand()
         {
-            var isLatest = await CrossStoreInfo.Current.IsUsingLatestVersion();
-
-            if (!isLatest)
+            try
             {
-                var confirmResult = await UserDialogs.Instance.ConfirmAsync(message: "There's new update from store.", okText: "Update", cancelText: "Later");
-                if (confirmResult)
+                UserDialogs.Instance.ShowLoading("Checking for new version");
+                var isLatest = await CrossStoreInfo.Current.IsUsingLatestVersion();
+
+                if (!isLatest)
                 {
-                    await CrossStoreInfo.Current.OpenAppInStore();
+                    UserDialogs.Instance.HideLoading();
+                    var confirmResult = await UserDialogs.Instance.ConfirmAsync(message: "There's new update from store.", okText: "Update Now", cancelText: "Later");
+                    if (confirmResult)
+                    {
+                        await CrossStoreInfo.Current.OpenAppInStore();
+                    }
                 }
             }
+            catch (HttpRequestException ex)
+            {
+                UserDialogs.Instance.HideLoading();
+                await UserDialogs.Instance.AlertAsync(title: "Error", message: "Please check internet connectivity.");
+            }
+            catch (Exception ex)
+            {
+                UserDialogs.Instance.HideLoading();
+                await UserDialogs.Instance.AlertAsync(title: "Error", message: ex.Message);
+            }
+
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
 
-            this.PackageName = CrossStoreInfo.Current.GetAppPackageName();
-            this.ManifestVersion = CrossStoreInfo.Current.GetCurrentVersion();
-            var appStoreInfo = await CrossStoreInfo.Current.GetStoreAppVersionAsync();
+            this.PackageName = CrossStoreInfo.Current.GetPackageName();
+            this.ManifestVersion = CrossStoreInfo.Current.InstalledVersionNumber;
 
-            this.AppStoreVersion = appStoreInfo?.AppVersion;
+            try
+            {
+                UserDialogs.Instance.ShowLoading("Getting app's information");
+
+                var appStoreInfo = await CrossStoreInfo.Current.GetAppInfo();
+                this.AppStoreVersion = appStoreInfo?.StoreVersion;
+            }
+            catch (HttpRequestException ex)
+            {
+                UserDialogs.Instance.HideLoading();
+                await UserDialogs.Instance.AlertAsync(title: "Error", message: "Please check internet connectivity.");
+            }
+            catch (Exception ex)
+            {
+                UserDialogs.Instance.HideLoading();
+                await UserDialogs.Instance.AlertAsync(title: "Error", message: ex.Message);
+            }
         }
     }
 }

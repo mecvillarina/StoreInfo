@@ -22,7 +22,6 @@ namespace StoreInfo.Sample.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-			Plugin.StoreInfo.StoreInfo.Init();
 
 			LoadApplication(new App(new iOSInitializer()));
 

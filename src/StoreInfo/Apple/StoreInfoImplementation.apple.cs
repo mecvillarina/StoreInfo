@@ -32,11 +32,11 @@ namespace Plugin.StoreInfo
             {
                 latestVersion = await GetLatestVersionNumber();
 
-                return Version.Parse(latestVersion).CompareTo(Version.Parse(_bundleVersion)) <= 0;
+                return Version.Parse(latestVersion).CompareTo(Version.Parse(this._bundleVersion)) <= 0;
             }
             catch (Exception e)
             {
-                throw new StoreInfoException($"Error comparing current app version number with latest. Bundle version={_bundleVersion} and lastest version={latestVersion} .", e);
+                throw new StoreInfoException($"Error comparing current app version number with latest. Bundle version={this._bundleVersion} and lastest version={latestVersion} .", e);
             }
         }
 
@@ -57,20 +57,21 @@ namespace Plugin.StoreInfo
             string appVersion = string.Empty;
             string appUrl = string.Format("https://itunes.apple.com/us/lookup?bundleId={0}", appName);
 
-            using (var client = new HttpClient())
+            try
             {
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6");
-
-                var response = await client.GetAsync(appUrl);
-
-                if (!response.IsSuccessStatusCode)
+                using (var client = new HttpClient())
                 {
-                    throw new StoreInfoException($"Error connecting to the App Store. Url={appUrl}.");
-                }
+                    client.DefaultRequestHeaders.Clear();
+                    client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6");
 
-                try
-                {
+                    var response = await client.GetAsync(appUrl);
+
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        throw new StoreInfoException($"Error connecting to the App Store. Url={appUrl}.");
+                    }
+
+
                     string contentResponse = await response.Content.ReadAsStringAsync();
 
                     var lookupContractResponse = JsonConvert.DeserializeObject<AppStoreLookupRoot>(contentResponse);
@@ -88,10 +89,10 @@ namespace Plugin.StoreInfo
                         }
                     }
                 }
-                catch(Exception e)
-                {
-                    throw new StoreInfoException($"Error parsing content from the App Store. Url={appUrl}.", e);
-                }
+            }
+            catch (Exception e)
+            {
+                throw new StoreInfoException($"Error parsing content from the App Store. Url={appUrl}.", e);
             }
 
             return new AppStoreInfo() { StoreVersion = appVersion, StoreUrl = appUrl, AppName = appName };
@@ -108,6 +109,12 @@ namespace Plugin.StoreInfo
         {
             var appStoreInfo = await GetAppInfo(appName);
             return appStoreInfo.StoreVersion;
+        }
+
+        /// <inheritdoc />
+        public string GetPackageName()
+        {
+            return this._bundleName;
         }
 
         /// <inheritdoc />

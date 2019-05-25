@@ -19,7 +19,7 @@ namespace Plugin.StoreInfo
         /// <summary>
         /// Check if the current app is using the latest version.
         /// </summary>
-        /// <value>Return True if the app is using the latest version.</value>
+        /// <returns>Return True if the app is using the latest version.</returns>
         Task<bool> IsUsingLatestVersion();
 
         /// <summary>
@@ -47,6 +47,12 @@ namespace Plugin.StoreInfo
         /// <returns>The specified app's latest version number</returns>
         /// <param name="appName">Name of the app to get.</param>
         Task<string> GetLatestVersionNumber(string appName);
+
+        /// <summary>
+        /// Gets the package name/bundle id of the current app.
+        /// </summary>
+        /// <returns>The current app's package name/bundle id.</returns>
+        string GetPackageName();
 
         /// <summary>
         /// Opens the current app in the public store.
