@@ -90,7 +90,7 @@ steps:
 
 - task: MSBuild@1
   inputs:
-    solution: '**/*.sln'
+    solution: 'src/*.sln'
     configuration: '$(buildConfiguration)'
     msbuildArguments: '/p:PackageVersion=$(packageVersion);AssemblyVersion=$(assemblyVersion);AssemblyFileVersion=$(assemblyVersion)'
 
