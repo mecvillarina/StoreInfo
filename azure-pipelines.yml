@@ -1,6 +1,28 @@
-- task: NuGetCommand@2
-  inputs:
-    command: 'restore'
-    restoreSolution: 'StoreInfo/src/*.sln'
-    feedsToUse: 'select'
-    versioningScheme: 'off' 
+name: $(build.buildId)
+
+variables:
+  buildConfiguration: 'Release'
+  version: '1.0.3'
+  buildNumber: $[counter('versioncounter', 70)]
+
+trigger:
+  branches:
+    include:
+    - master
+    - refs/tags/v*
+  paths:
+    include:
+    - src/
+    - nuget/*.nuspec
+
+pr:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - src/
+
+pool:
+  vmImage: vs2017-win2016
+  demands: msbuild
