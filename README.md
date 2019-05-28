@@ -1,6 +1,10 @@
 ##  Store Info for Xamarin.Forms [![PayPal donate button](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4KHTXCBWYXTNG "Donate to this project using Paypal")
 
+
 Store Info for Xamarin Forms has a mechanism to extract the current information of your app in store (playstore/appstore) using the package name/bundle id.  Install this in your PCL and platform specific projects.
+
+[![Build Status](https://mecodes.visualstudio.com/XFStoreInfo/_apis/build/status/mecvillarina.StoreInfo?branchName=master)](https://mecodes.visualstudio.com/XFStoreInfo/_apis/build/status/mecvillarina.StoreInfo?branchName=master)
+[![NuGet](https://img.shields.io/nuget/v/Plugin.StoreInfo.svg?label=nuget)](https://www.nuget.org/packages/Plugin.StoreInfo)
 
 Nuget: https://www.nuget.org/packages/Plugin.StoreInfo/
 
