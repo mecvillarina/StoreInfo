@@ -1,4 +1,16 @@
 # Starter pipeline
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: 'StoreInfo/src/*.sln'
+    feedsToUse: 'select'
+    versioningScheme: 'off'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: 'StoreInfo/src/*.sln'
+    feedsToUse: 'select'
+    versioningScheme: 'off'
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
