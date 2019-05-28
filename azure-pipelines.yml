@@ -84,3 +84,23 @@ steps:
     }
   displayName: 'PowerShell script - Set version number'
 
+- task: NuGetToolInstaller@0
+
+- task: NuGetCommand@2
+
+- task: MSBuild@1
+  inputs:
+    solution: '**/*.sln'
+    configuration: '$(buildConfiguration)'
+    msbuildArguments: '/p:PackageVersion=$(packageVersion);AssemblyVersion=$(assemblyVersion);AssemblyFileVersion=$(assemblyVersion)'
+
+- task: CopyFiles@2
+  displayName: 'Copy .nupkg to artifact staging directory'
+  inputs:
+    SourceFolder: '$(build.sourcesDirectory)'
+    Contents: '**\bin\$(buildConfiguration)\**\*.nupkg'
+    TargetFolder: '$(build.artifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(build.artifactStagingDirectory)'
