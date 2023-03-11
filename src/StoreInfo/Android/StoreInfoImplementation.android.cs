@@ -1,6 +1,5 @@
 ﻿using Android.App;
 using Android.Content;
-using HtmlAgilityPack;
 using System;
 using System.Linq;
 using System.Net.Http;
@@ -75,10 +74,6 @@ namespace Plugin.StoreInfo
 
                     string contentResponse = await response.Content.ReadAsStringAsync();
 
-                    var htmlDoc = new HtmlDocument();
-                    htmlDoc.LoadHtml(contentResponse);
-                    var rootNode = htmlDoc.DocumentNode;
-
                     var rx = new Regex(@"""\d+\.\d+\.\d", RegexOptions.Compiled);
                     MatchCollection matches = rx.Matches(contentResponse);
 
@@ -146,6 +141,6 @@ namespace Plugin.StoreInfo
             return Task.FromResult(true);
         }
 
-      
+
     }
 }

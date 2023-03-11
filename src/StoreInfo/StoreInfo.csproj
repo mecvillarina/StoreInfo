@@ -1,121 +1,111 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 
-  <PropertyGroup>
-    <!--Work around so the conditions work below-->
-    <TargetFrameworks></TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid81</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid81</TargetFrameworks>
-    <!--Feel free to add as many targets as you need below
+	<PropertyGroup>
+		<!--Work around so the conditions work below-->
+		<TargetFrameworks></TargetFrameworks>
+		<TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid81</TargetFrameworks>
+		<TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid81</TargetFrameworks>
+		<!--Feel free to add as many targets as you need below
     netstandard1.0;netstandard2.0;MonoAndroid81;Xamarin.iOS10;uap10.0.16299;Xamarin.TVOS10;Xamarin.WatchOS10;Xamarin.Mac20;Tizen40
     For UWP update the version number with a version number you have installed.
     -->
-    <AssemblyName>Plugin.StoreInfo</AssemblyName>
-    <RootNamespace>Plugin.StoreInfo</RootNamespace>
-    <PackageId>Plugin.StoreInfo</PackageId>
-    
-    <Product>Plugin.StoreInfo</Product>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
-    <Version>1.0.4</Version>
-    <PackageVersion>1.0.4</PackageVersion>
-    <PackOnBuild>true</PackOnBuild>
-    <NeutralLanguage>en</NeutralLanguage>
-    <LangVersion>default</LangVersion>
-    <DefineConstants>$(DefineConstants);</DefineConstants>
-    
-    <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
-    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+		<AssemblyName>Plugin.StoreInfo</AssemblyName>
+		<RootNamespace>Plugin.StoreInfo</RootNamespace>
+		<PackageId>Plugin.StoreInfo</PackageId>
 
-    <LangVersion>latest</LangVersion>
-    
-    <!--TODO: Fill these in-->
-    <PackageLicenseUrl>https://github.com/mecvillarina/StoreInfo/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/mecvillarina/StoreInfo</PackageProjectUrl>
-    <RepositoryUrl></RepositoryUrl>
-    <PackageReleaseNotes>https://github.com/mecvillarina/StoreInfo/blob/master/CHANGELOG.md</PackageReleaseNotes>
-    <PackageIconUrl>https://github.com/mecvillarina/StoreInfo/blob/master/assets/icon.png</PackageIconUrl>
-    <PackageTags>xamarin, windows, ios, android, xamarin.forms, plugin, StoreInfo</PackageTags>
-    
-    <Title>StoreInfo Plugin for Xamarin</Title>
-    <Summary>Store Info for Xamarin Forms has a mechanism to extract the current information of your app in store (playstore/appstore) using the package name/bundle id. </Summary>
-    <Description>Store Info for Xamarin Forms has a mechanism to extract the current information of your app in store (playstore/appstore) using the package name/bundle id. Install this in your PCL and platform specific projects.</Description>
-    
-    <Owners>mecvillarina</Owners>
-    <Authors>mecvillarina</Authors>
-    <Copyright>Copyright 2019</Copyright>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-  </PropertyGroup>
+		<Product>Plugin.StoreInfo</Product>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
+		<Version>1.0.4</Version>
+		<PackageVersion>1.0.4</PackageVersion>
+		<PackOnBuild>true</PackOnBuild>
+		<NeutralLanguage>en</NeutralLanguage>
+		<LangVersion>default</LangVersion>
+		<DefineConstants>$(DefineConstants);</DefineConstants>
 
-  <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
-    <DebugType>full</DebugType>
-    <DebugSymbols>true</DebugSymbols>
-    <GenerateDocumentationFile>false</GenerateDocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)'=='Release' ">
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <DebugType>pdbonly</DebugType>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-  </PropertyGroup>
+		<UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
+		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
 
-  <ItemGroup>
-    <Compile Include="**\Shared\*.shared.cs" />
-    <Compile Include="**\Model\*.cs" />
-  </ItemGroup>
+		<LangVersion>latest</LangVersion>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
-  </ItemGroup>
+		<!--TODO: Fill these in-->
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/mecvillarina/StoreInfo</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/mecvillarina/StoreInfo.git</RepositoryUrl>
+		<PackageReleaseNotes>https://github.com/mecvillarina/StoreInfo/blob/master/CHANGELOG.md</PackageReleaseNotes>
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageTags>xamarin, windows, ios, android, xamarin.forms, plugin, StoreInfo</PackageTags>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 
-  <!--<ItemGroup Condition=" $(TargetFramework.StartsWith('uap10.0')) ">
+		<Title>StoreInfo Plugin for Xamarin</Title>
+		<Summary>Store Info for Xamarin Forms has a mechanism to extract the current information of your app in store (playstore/appstore) using the package name/bundle id. </Summary>
+		<Description>Store Info for Xamarin Forms has a mechanism to extract the current information of your app in store (playstore/appstore) using the package name/bundle id. Install this in your PCL and platform specific projects.</Description>
+
+		<Owners>mecvillarina</Owners>
+		<Authors>mecvillarina</Authors>
+		<Copyright>Copyright 2023</Copyright>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
+		<DebugType>full</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+		<GenerateDocumentationFile>false</GenerateDocumentationFile>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)'=='Release' ">
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<DebugType>pdbonly</DebugType>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="**\Shared\*.shared.cs" />
+		<Compile Include="**\Model\*.cs" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\..\README.md" Pack="true" PackagePath="\" />
+		<None Include="..\..\assets\icon.png" Pack="true" PackagePath="\" />
+	</ItemGroup>
+	
+	<!--<ItemGroup Condition=" $(TargetFramework.StartsWith('uap10.0')) ">
     <Compile Include="**\*.uwp.cs" />
-    --><!--
+    -->
+	<!--
     If you need to add sdk references:
      <SDKReference Include="WindowsMobile, Version=10.0.16299.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
-    --><!--
+    -->
+	<!--
   </ItemGroup>-->
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
-    <Compile Include="**\Android\*.android.cs" />
-  </ItemGroup>
+	<ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+		<Compile Include="**\Android\*.android.cs" />
+	</ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
-    <Compile Include="**\Apple\*.apple.cs" />
-  </ItemGroup>
+	<ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+		<Compile Include="**\Apple\*.apple.cs" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="System.Text.Json" Version="7.0.2" />
+		<PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
+	</ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="HtmlAgilityPack">
-      <Version>1.11.4</Version>
-    </PackageReference>
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="Shared\StoreInfoException.shared.cs" />
+	</ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'Xamarin.iOS10'">
-    <PackageReference Include="HtmlAgilityPack">
-      <Version>1.11.4</Version>
-    </PackageReference>
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="Apple\StoreInfoImplementation.apple.cs" />
+	</ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'MonoAndroid81'">
-    <PackageReference Include="HtmlAgilityPack">
-      <Version>1.11.4</Version>
-    </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Shared\StoreInfoException.shared.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Apple\StoreInfoImplementation.apple.cs" />
-  </ItemGroup>
-
-  <!--Additional item groups-->
-  <!--
+	<!--Additional item groups-->
+	<!--
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.TVOS')) ">
     <Compile Include="**\*.tvos.cs" />
   </ItemGroup>

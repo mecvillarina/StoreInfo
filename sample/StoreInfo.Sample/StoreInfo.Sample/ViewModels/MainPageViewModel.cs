@@ -83,6 +83,7 @@ namespace StoreInfo.Sample.ViewModels
 
                 var appStoreInfo = await CrossStoreInfo.Current.GetAppInfo();
                 this.AppStoreVersion = appStoreInfo?.StoreVersion;
+                UserDialogs.Instance.HideLoading();
             }
             catch (HttpRequestException ex)
             {

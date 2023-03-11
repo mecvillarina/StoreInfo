@@ -1,28 +1,27 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Plugin.StoreInfo
 {
     internal class AppStoreLookupRoot
     {
-        [JsonProperty("resultCount")]
+        [JsonPropertyName("resultCount")]
         public long ResultCount { get; set; }
 
-        [JsonProperty("results")]
+        [JsonPropertyName("results")]
         public List<AppStoreLookupResult> LookupResults { get; set; }
     }
 
     internal class AppStoreLookupResult
     {
-        [JsonProperty("currentVersionReleaseDate")]
+        [JsonPropertyName("currentVersionReleaseDate")]
         public DateTimeOffset CurrentVersionReleaseDate { get; set; }
 
-        [JsonProperty("version")]
+        [JsonPropertyName("version")]
         public string Version { get; set; }
 
-        [JsonProperty("trackViewUrl")]
+        [JsonPropertyName("trackViewUrl")]
         public Uri TrackViewUrl { get; set; }
     }
 }
