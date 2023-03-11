@@ -81,7 +81,6 @@ namespace Plugin.StoreInfo
 
                     var rx = new Regex(@"""\d+\.\d+\.\d", RegexOptions.Compiled);
                     MatchCollection matches = rx.Matches(contentResponse);
-                    var s = matches[2].Value;
 
                     if (matches.Any())
                     {
