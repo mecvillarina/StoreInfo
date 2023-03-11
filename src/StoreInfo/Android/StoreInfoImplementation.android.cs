@@ -4,6 +4,7 @@ using HtmlAgilityPack;
 using System;
 using System.Linq;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Net = Android.Net;
 
@@ -78,15 +79,13 @@ namespace Plugin.StoreInfo
                     htmlDoc.LoadHtml(contentResponse);
                     var rootNode = htmlDoc.DocumentNode;
 
-                    if (rootNode != null)
-                    {
-                        var currentVersionNode = rootNode.Descendants().FirstOrDefault(x => x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains("hAyfc") && x.InnerText.Contains("Current Version"));
+                    var rx = new Regex(@"""\d+\.\d+\.\d", RegexOptions.Compiled);
+                    MatchCollection matches = rx.Matches(contentResponse);
 
-                        if (currentVersionNode != null && !string.IsNullOrEmpty(currentVersionNode.InnerText))
-                        {
-                            appVersion = currentVersionNode.InnerText.Replace("Current Version", "").Trim();
-                            return new AppStoreInfo() { StoreVersion = appVersion, AppName = appName, StoreUrl = appUrl };
-                        }
+                    if (matches.Any())
+                    {
+                        appVersion = matches[0].Value.Replace("\"", string.Empty);
+                        return new AppStoreInfo() { StoreVersion = appVersion, AppName = appName, StoreUrl = appUrl };
                     }
                 }
             }

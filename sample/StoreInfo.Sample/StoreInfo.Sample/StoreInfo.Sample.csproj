@@ -18,10 +18,9 @@
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.1.0.431" />
   </ItemGroup>
 
+
   <ItemGroup>
-    <Reference Include="Plugin.StoreInfo">
-      <HintPath>..\..\..\src\StoreInfo\bin\Debug\netstandard2.0\Plugin.StoreInfo.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\..\src\StoreInfo\StoreInfo.csproj" />
   </ItemGroup>
 
 </Project>
