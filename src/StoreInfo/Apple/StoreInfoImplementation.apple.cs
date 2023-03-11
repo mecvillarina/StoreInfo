@@ -1,8 +1,8 @@
 ﻿using Foundation;
-using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Plugin.StoreInfo
@@ -74,7 +74,7 @@ namespace Plugin.StoreInfo
 
                     string contentResponse = await response.Content.ReadAsStringAsync();
 
-                    var lookupContractResponse = JsonConvert.DeserializeObject<AppStoreLookupRoot>(contentResponse);
+                    var lookupContractResponse = JsonSerializer.Deserialize<AppStoreLookupRoot>(contentResponse);
 
                     if (lookupContractResponse.ResultCount > 0)
                     {
