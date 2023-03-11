@@ -96,6 +96,10 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\src\StoreInfo\StoreInfo.csproj">
+      <Project>{a3806081-fcdc-4e6c-8159-754fdb12671c}</Project>
+      <Name>StoreInfo</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StoreInfo.Sample\StoreInfo.Sample.csproj">
       <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
       <Name>StoreInfo.Sample</Name>
